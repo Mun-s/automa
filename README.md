@@ -22,11 +22,11 @@ install  jenkins in the container using command :
         RUN usermod -aG docker jenkins
 
 get inside the jenkins container and install  few binaries:
-    - install the kubectl binary under /usr/local/bin/ of master jenkins node
+    Install the kubectl binary under /usr/local/bin/ of master jenkins node
             curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
             chmod +x ./kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
-    - install helm binary under under /usr/local/bin of master jenkins node
+    Iinstall helm binary under under /usr/local/bin of master jenkins node
             curl https://get.helm.sh/helm-v2.14.2-linux-amd64.tar.gz
             tar -zxvf helm-v2.0.0-linux-amd64.tgz
             mv linux-amd64/helm /usr/local/bin/helm 
