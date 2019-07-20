@@ -1,6 +1,7 @@
 
 
 pre-requisites: 
+
 install high avaliabilty cluster through ansible by following :https://github.com/kairen/kubeadm-ansible
 
 install  jenkins in the container using command : 
