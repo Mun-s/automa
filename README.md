@@ -4,6 +4,7 @@ pre-requisites:
 install high avaliabilty using script install.sh
 
 install  jenkins in the container using command : 
+      
       docker container run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock  -v /Users/manishthakur/jenkins_home:/var/jenkins_home dokcer-jenkins
 
       DockerFile:
