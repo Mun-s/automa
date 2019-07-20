@@ -1,7 +1,11 @@
+
+
 pre-requisites: 
-install high avaliabilty using script install.sh
+
+install high avaliabilty cluster through ansible by following :https://github.com/kairen/kubeadm-ansible
 
 install  jenkins in the container using command : 
+      
       docker container run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock  -v /Users/manishthakur/jenkins_home:/var/jenkins_home dokcer-jenkins
 
       DockerFile:
@@ -20,11 +24,12 @@ install  jenkins in the container using command :
         RUN usermod -aG docker jenkins
 
 get inside the jenkins container and install  few binaries:
-        install the kubectl binary under /usr/local/bin/ of master jenkins node
+
+    Install the kubectl binary under /usr/local/bin/ of master jenkins node
             curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
             chmod +x ./kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
-        install helm binary under under /usr/local/bin of master jenkins node
+    Iinstall helm binary under under /usr/local/bin of master jenkins node
             curl https://get.helm.sh/helm-v2.14.2-linux-amd64.tar.gz
             tar -zxvf helm-v2.0.0-linux-amd64.tgz
             mv linux-amd64/helm /usr/local/bin/helm 
@@ -40,21 +45,20 @@ Automation: get the jenkisfile from the  git and create a pipeline.
    server service ip). Grafana will  pickup  all the  metrics from the  prometheus  instance(Node/Container/API).
 5) set up ELK stack with  helm deployment.
 6) deployed a blue- green deploymnt.
-   6.1) deployed tarefik ingress controller
-   6.2) configured RBAC policies for it
-   6.3) created a ingress object which defines path for blue and green deploymnt
-   6.4) created a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
-   6.5) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
-   6.6) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
+   -  deployed tarefik ingress controller
+   -  configured RBAC policies for it
+   -  created a ingress object which defines path for blue and green deploymnt
+   -  created a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
+   -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
+   -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
 7) deployed istio using helm chart
-   7.1) deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
+   -  deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
         that return their version and instance (hostname) when called.
-   7.2) manually injected automatic sidecar injection  
-   7.3) Used CRD kind of Gateway and virtualservices 
-   7.4) export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT ( mannual step)
-   7.5) Enable autoscale on both services (set hpa)
-   7.5) curl http://$GATEWAY_URL/hello
-   7.6) generate the  load with load.sh  script and check  the no. of replicas on versions of helloworld.
-
+   -  manually injected automatic sidecar injection  
+   -  Used CRD kind of Gateway and virtualservices 
+   -  export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT ( mannual step)
+   -  Enable autoscale on both services (set hpa)
+   -  curl http://$GATEWAY_URL/hello
+   -  generate the  load with load.sh  script and check  the no. of replicas on versions of helloworld.
 
 
