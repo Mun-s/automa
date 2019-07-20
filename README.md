@@ -1,3 +1,5 @@
+
+
 pre-requisites: 
 install high avaliabilty using script install.sh
 
@@ -40,17 +42,14 @@ Automation: get the jenkisfile from the  git and create a pipeline.
    server service ip). Grafana will  pickup  all the  metrics from the  prometheus  instance(Node/Container/API).
 5) set up ELK stack with  helm deployment.
 6) deployed a blue- green deploymnt.
-   6.1) deployed tarefik ingress controller
-   6.2) configured RBAC policies for it
-   6.3) created a ingress object which defines path for blue and green deploymnt
-   6.4) created a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
-   6.5) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
-   6.6) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
+   -  deployed tarefik ingress controller
+   -  configured RBAC policies for it
+   -  created a ingress object which defines path for blue and green deploymnt
+   -  created a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
+   -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
+   -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
 7) deployed istio using helm chart
-      7.1) deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
-      
-   
-   
+   7.1) deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
         that return their version and instance (hostname) when called.
    7.2) manually injected automatic sidecar injection  
    7.3) Used CRD kind of Gateway and virtualservices 
@@ -58,6 +57,5 @@ Automation: get the jenkisfile from the  git and create a pipeline.
    7.5) Enable autoscale on both services (set hpa)
    7.5) curl http://$GATEWAY_URL/hello
    7.6) generate the  load with load.sh  script and check  the no. of replicas on versions of helloworld.
-
 
 
