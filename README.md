@@ -22,6 +22,7 @@ install  jenkins in the container using command :
         RUN usermod -aG docker jenkins
 
 get inside the jenkins container and install  few binaries:
+
     Install the kubectl binary under /usr/local/bin/ of master jenkins node
             curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
             chmod +x ./kubectl
