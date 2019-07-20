@@ -107,10 +107,10 @@ pipeline {
         ////////// Step 1 //////////
         stage('Git clone and setup') {
             steps {
-                echo "Check out k8s-jenkins code"
-                git branch: "master",
-                        credentialsId: 'Mun-s',
-                        url: 'https://github.com/Mun-s/automa.git'
+                echo "Check out acme code"
+                //git branch: "master",
+                //        credentialsId: 'eldada-bb',
+                //        url: 'https://github.com/eldada/jenkins-pipeline-kubernetes.git'
 
                 // Validate kubectl
                 sh "kubectl cluster-info"
@@ -206,8 +206,11 @@ pipeline {
         stage('Helm istio  deployment') {
             steps {
                   script {
-                       sh "helm install --name istio incubator/istio --namespace istio-system --devel --version 0.2.7-chart2"
-                       sh "helm upgrade istio incubator/istio --reuse-values --set istio.install=true --devel --version 0.2.7-chart2"
+                      sh "helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.1.7/charts/"
+
+                      sh "helm install --name istio-init --namespace istio-system istio.io/istio-init"
+                      sh "helm install --name istio --namespace istio-system --set grafana.enabled=true istio.io/istio"
+                       
 
               }                 
             }
@@ -231,15 +234,17 @@ pipeline {
        stage('canary deployment') {
             steps {
                   script {
-                       sh "istioctl kube-inject -f helloworld.yaml -o helloworld-istio.yaml"
-                       sh "kubectl create -f helloworld-istio.yaml"
+                       createNamespace ("canary")
                        sh "kubectl create -f helloworld-gateway.yaml"
-                       sh "kubectl autoscale deployment helloworld-v1 --cpu-percent=50 --min=1 --max=10"
-                       sh "kubectl autoscale deployment helloworld-v2 --cpu-percent=50 --min=1 --max=10"
-                       sh "loadgen.sh &"
-                       sh "loadgen.sh &"
+                       sh "kubectl create -f helloworld.yaml"
+                       sh "kubectl label namespace canary istio-injection=enabled"
+                       sh "kubectl delete pod -l app=helloworld -n canary"
+                       sh "kubectl autoscale deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
+                       sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
+                       //sh "loadgen.sh &"
+                       //sh "loadgen.sh &"
                        sh "sleep 40"
-                       sh "kubectl  get  hpa"
+                       sh "kubectl  get  hpa -n canary"
 
               }                 
             }
