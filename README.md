@@ -59,6 +59,6 @@ Automation: get the jenkisfile from the  git and create a pipeline.
    -  export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT ( mannual step)
    -  Enable autoscale on both services (set hpa)
    -  curl http://$GATEWAY_URL/hello
-   -  generate the  load with load.sh  script and check  the no. of replicas on versions of helloworld.
+   -  generate the  load with loadgen.sh  script and check  the no. of replicas on versions of helloworld.
 
 
