@@ -1,467 +1,0 @@
-Script started on Sat Jul 20 22:24:35 2019
-[?1034hbash-3.2$ bectl create -f helloworld.yaml"
->                        sh "kubectl label namespace canary istio-injection=enabled"
->                        sh "kubectl delete pod -l app=helloworld -n canary"
->                        sh "kubectl autoscale deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
->                        sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
->                        //sh "loadgen.sh &"
->                        //sh "loadgen.sh &"
->                        sh "sleep 40"
->                        sh "kubectl  get  hpa -n canary"
-> 
->               }                 
->             }
->         }
-> 
->        stage('Dev tests') {
->             parallel {
->                 stage('Curl http_code') {
->                     steps {
->                         curlTest ("development", 'http_code')
->                     }
->                 }
->                 stage('Curl total_time') {
->                     steps {
->                         curlTest ("development", 'time_total')
->                     }
->                 }
->                 stage('Curl size_download') {
->                     steps {
->                         curlTest ("development", 'size_download')
->                     }
->                 }
->             }
->         }
-> 
->         stage('Cleanup dev') {
->             steps {
->                 script {
->                     // Remove release if exists
->                     helmDelete ("development", "guestbook")
->                 }
->             }
->         }
->         
-> 
->        
-> 
->         
-> 
->   
->     
->     }
-> }
-> c
-bash-3.2$ bectl create -f helloworld.yaml"
-                       sh "kubectl label namespace canary istio-injection=enabled"
-                       sh "kubectl delete pod -l app=helloworld -n canary"
-                       sh "kubectl autoscale deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
-                       sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
-                       //sh "loadgen.sh &"
-                       //sh "loadgen.sh &"
-                       sh "sleep 40"
-                       sh "kubectl  get  hpa -n canary"
-
-              }                 
-            }
-        }
-
-       stage('Dev tests') {
-            parallel {
-                stage('Curl http_code') {
-                    steps {
-                        curlTest ("development", 'http_code')
-                    }
-                }
-                stage('Curl total_time') {
-                    steps {
-                        curlTest ("development", 'time_total')
-                    }
-                }
-                stage('Curl size_download') {
-                    steps {
-                        curlTest ("development", 'size_download')
-                    }
-                }
-            }
-        }
-
-        stage('Cleanup dev') {
-            steps {
-                script {
-                    // Remove release if exists
-                    helmDelete ("development", "guestbook")
-                }
-            }
-        }
-        
-
-       
-
-        
-
-  
-    
-    }
-}[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[CC[C[C[C[C[C[C[C[C[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-v1 -n canary --cpu-percent=50 --min=1 --max=10"
-                       sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
-                       //sh "loadgen.sh &"
-                       //sh "loadgen.sh &"
-                       sh "sleep 40"
-                       sh "kubectl  get  hpa -n canary"
-
-              }                 
-            }
-        }
-
-       stage('Dev tests') {
-            parallel {
-                stage('Curl http_code') {
-                    steps {
-                        curlTest ("development", 'http_code')
-                    }
-                }
-                stage('Curl total_time') {
-                    steps {
-                        curlTest ("development", 'time_total')
-                    }
-                }
-                stage('Curl size_download') {
-                    steps {
-                        curlTest ("development", 'size_download')
-                    }
-                }
-            }
-        }
-
-        stage('Cleanup dev') {
-            steps {
-                script {
-                    // Remove release if exists
-                    helmDelete ("development", "guestbook")
-                }
-            }
-        }
-        
-
-       
-
-        
-
-  
-    
-    }
-}[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C ELK to the  repo and deploying it
-bash-3.2$                         sh "sleep 5"
-sh: sleep 5: No such file or directory
-bash-3.2$                     }                 
-bash: syntax error near unexpected token `}'
-bash-3.2$             }
-bash: syntax error near unexpected token `}'
-bash-3.2$         }
-bash: syntax error near unexpected token `}'
-bash-3.2$ 
-bash-3.2$          stage('blue-green deployment') {
-bash: syntax error near unexpected token `'blue-green deployment''
-bash-3.2$             steps {
-bash: steps: command not found
-bash-3.2$                 script {
-Script started, output file is {
-[?1034hbash-3.2$          
-bash-3.2$ 
-bash-3.2$               }                 
-bash: syntax error near unexpected token `}'
-bash-3.2$             }
-bash: syntax error near unexpected token `}'
-bash-3.2$         }
-bash: syntax error near unexpected token `}'
-bash-3.2$ 
-bash-3.2$        /* stage('Helm istio  deployment') {
-bash: syntax error near unexpected token `('
-bash-3.2$             steps {
-bash: steps: command not found
-bash-3.2$                   script {
-Script started, output file is {
-[?1034hbash-3.2$ bectl create -f helloworld.yaml"
->                        sh "kubectl label namespace canary istio-injection=enabled"
->                        sh "kubectl delete pod -l app=helloworld -n canary"
->                        sh "kubectl autoscale deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
->                        sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
->                        //sh "loadgen.sh &"
->                        //sh "loadgen.sh &"
->                        sh "sleep 40"
->                        sh "kubectl  get  hpa -n canary"
-> 
->               }                 
->             }
->         }
-> 
->        stage('Dev tests') {
->             parallel {
->                 stage('Curl http_code') {
->                     steps {
->                         curlTest ("development", 'http_code')
->    deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
->                        sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
->                        //sh "loadgen.sh &"
->                        //sh "loadgen.sh &"
->                        sh "sleep 40"
->                        sh "kubectl  get  hpa -n canary"
-> 
->               }                 
->             }
->         }
-> 
->        stage('Dev tests') {
->             parallel {
->                 stage('Curl http_code') {
->                     steps {
->                         curlTest ("development", 'http_code')
->                     }
->                 }
->                 stage('Curl total_time') {
->                     steps {
->                         curlTest ("development", 'time_total')
->                     }
->                 }
->                 stage('Curl size_download') {
->                     steps {
->                         curlTest ("development", 'size_download')
->                     }
->                 }
->             }
->         }
-> 
->         stage('Cleanup dev') {
->             steps {
->                 script {
->                     // Remove release if exists
->                     helmDelete ("development", "guestbook")
->                 }
->             }
->         }
->         
-> 
->        
-> 
->         
-> 
->   
->     
->     }
-> }
-> c
-bash-3.2$ bectl create -f helloworld.yaml"
-                       sh "kubectl label namespace canary istio-injection=enabled"
-                       sh "kubectl delete pod -l app=helloworld -n canary"
-                       sh "kubectl autoscale deployment helloworld-v1 -n canary --cpu-percent=50 --min=1 --max=10"
-                       sh "kubectl autoscale deployment helloworld-v2 -n canary --cpu-percent=50 --min=1 --max=10"
-                       //sh "loadgen.sh &"
-                       //sh "loadgen.sh &"
-                       sh "sleep 40"
-                       sh "kubectl  get  hpa -n canary"
-
-              }                 
-            }
-        }
-
-       stage('Dev tests') {
-            parallel {
-                stage('Curl http_code') {
-                    steps {
-                        curlTest ("development", 'http_code')
-                    }
-                }
-                stage('Curl total_time') {
-                    steps {
-                        curlTest ("development", 'time_total')
-                    }
-                }
-                stage('Curl size_download') {
-                    steps {
-                        curlTest ("development", 'size_download')
-                    }
-                }
-            }
-        }
-
-        stage('Cleanup dev') {
-            steps {
-                script {
-                    // Remove release if exists
-                    helmDelete ("development", "guestbook")
-                }
-            }
-        }
-        
-
-       
-
-        
-
-  
-    
-    }
-}[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K
-[K[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C
