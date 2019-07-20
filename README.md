@@ -47,7 +47,10 @@ Automation: get the jenkisfile from the  git and create a pipeline.
    6.5) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
    6.6) Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
 7) deployed istio using helm chart
-   7.1) deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
+      7.1) deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
+      
+   
+   
         that return their version and instance (hostname) when called.
    7.2) manually injected automatic sidecar injection  
    7.3) Used CRD kind of Gateway and virtualservices 
