@@ -53,7 +53,7 @@ configurtion, which is set in hel chart, it gets metrices from kubernetes-pods, 
    -  creates a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
    -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
    -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
-7) deployes istio using helm chart
+7) deploys istio using helm chart
    -  deployes a hello-world application  to demonstrate canary deployment. It runs two versions of a simple helloworld service that return their version and instance (hostname) when called.
    -  dynamically injectes automatic sidecar injection  
    -  Uses CRD kind of Gateway and virtualservices 
