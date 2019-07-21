@@ -1,6 +1,6 @@
 
 
-pre-requisites: 
+pre-requisites (manual steps): 
 
 install high avaliabilty cluster through ansible by following :https://github.com/kairen/kubeadm-ansible
 
@@ -23,7 +23,7 @@ install  jenkins in the container using command :
             && apt-get install docker-ce=17.12.1~ce-0~debian -y
         RUN usermod -aG docker jenkins
 
-get inside the jenkins container and install  few binaries:
+get inside the jenkins container and install kubectl  and helm binaries:
 
     Install the kubectl binary under /usr/local/bin/ of master jenkins node
             curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
@@ -33,32 +33,33 @@ get inside the jenkins container and install  few binaries:
             curl https://get.helm.sh/helm-v2.14.2-linux-amd64.tar.gz
             tar -zxvf helm-v2.0.0-linux-amd64.tgz
             mv linux-amd64/helm /usr/local/bin/helm 
+            
+    mkdir /root/.kube, touch /root/.kube/config and copy the k8s kubeconf(get it from the k8s cluster) in config file. 
 
 
-Automation: get the jenkisfile from the  git and create a pipeline.
+Automation: Create  a jenkins pipeline by using the jenkinsfile from the repo.
 
-1) it configues helm and sets permission for tiller so that it can access resources of the cluster.  
-2) Deployed guestbook application through helm.  Jenkins used as a CI tool.
-3) Deployed Prometheus helm chart in monitoring namespace . With its  kubernetes_sd_config, kubernetes service discovery configurtion, which is set in hel chart, it get
-   metrices from kubernetes-pods, kuberetes-servies, kube-kubelet,  etc. This metrices can  checked by  curl <node-ip>:<prometheus-port>/metrics. 
-4) mannual task: get  the prometheus server service IP and publish  it in datasource of grafana. ( create  a datasource in grafana and configure it with prometehus 
-   server service ip). Grafana will  pickup  all the  metrics from the  prometheus  instance(Node/Container/API).
-5) set up ELK stack with  helm deployment.
-6) deployed a blue- green deploymnt.
-   -  deployed tarefik ingress controller
-   -  configured RBAC policies for it
-   -  created a ingress object which defines path for blue and green deploymnt
-   -  created a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
+The Jenkins pipefile:
+1) configures helm and sets permission for tiller so that it can access resources of the k8s cluster.  
+2) Deployes guestbook application through helm.
+3) Deployes Prometheus helm chart in monitoring namespace . With its  kubernetes_sd_config, kubernetes service discovery      
+configurtion, which is set in hel chart, it gets metrices from kubernetes-pods, kuberetes-servies, kube-kubelet,  etc. This  metrices can  checked by  curl <node-ip>:<prometheus-port>/metrics. 
+4) to display the metrics in grafana, get  the prometheus server service IP and publish  it in datasource of grafana. ( create  a datasource in grafana and configure it with prometehus server service ip). Grafana will  pickup  all the  metrics from the  prometheus  instance(Node/Container/API).
+5) sets up ELK stack with  helm deployment.
+6) deploys a blue- green deploymnt.
+   -  deploys tarefik ingress controller
+   -  configures RBAC policies for it
+   -  creates a ingress object which defines path for blue and green deploymnt
+   -  creates a blue and green deploymnt and svc ( image used customized nginx, which displays green and blue pages on defined path ) 
    -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/green and see the green page
    -  Curl to the http://<External IP of the Node/cluster> :<node-port-of traefik-ing>/blue and see the blue page
-7) deployed istio using helm chart
-   -  deployed a hello-world application  to demonstrate canary deployment. ample runs two versions of a simple helloworld service
-        that return their version and instance (hostname) when called.
-   -  manually injected automatic sidecar injection  
-   -  Used CRD kind of Gateway and virtualservices 
-   -  export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT ( mannual step)
+7) deployes istio using helm chart
+   -  deployes a hello-world application  to demonstrate canary deployment. It runs two versions of a simple helloworld service that return their version and instance (hostname) when called.
+   -  dynamically injectes automatic sidecar injection  
+   -  Uses CRD kind of Gateway and virtualservices 
+   -  export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT (manual step)
    -  Enable autoscale on both services (set hpa)
    -  curl http://$GATEWAY_URL/hello
-   -  generate the  load with loadgen.sh  script and check  the no. of replicas on versions of helloworld.
+   -  generates the  load with loadgen.sh  script and check  the no. of replicas on versions of helloworld.
 
 
