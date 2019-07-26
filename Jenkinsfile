@@ -107,10 +107,10 @@ pipeline {
         ////////// Step 1 //////////
         stage('Git clone and setup') {
             steps {
-                echo "Check out acme code"
-                //git branch: "master",
-                //        credentialsId: 'eldada-bb',
-                //        url: 'https://github.com/eldada/jenkins-pipeline-kubernetes.git'
+                echo "Check out code"
+                git branch: "master",
+                        credentialsId: 'Mun-s',
+                        url: 'https://github.com/Mun-s/jenkins-pipeline-kubernetes.git'
 
                 // Validate kubectl
                 sh "kubectl cluster-info"
