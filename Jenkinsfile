@@ -110,7 +110,7 @@ pipeline {
                 echo "Check out code"
                 git branch: "master",
                         credentialsId: 'Mun-s',
-                        url: 'https://github.com/Mun-s/jenkins-pipeline-kubernetes.git'
+                        url: 'https://github.com/Mun-s/automa.git'
 
                 // Validate kubectl
                 sh "kubectl cluster-info"
